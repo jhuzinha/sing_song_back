@@ -47,7 +47,20 @@ describe("ROUTE RECOMMENDATIONS", () => {
         expect(result.body).toBeInstanceOf(Object)
         expect(result.body).toMatchObject(existRecommendation)
     })
+    it('GET /recommendations/random', async () => {
+        const recommendations = await manyRecomendationRandom()
+        await insertMany(recommendations)
+        const result = await supertest(app).get('/recommendations/random')
+        const existRecommendation = await verifyExitsRecommendation(result.body.name)
+        expect(result.body).not.toBeFalsy()
+        expect(result.body).toBeInstanceOf(Object)
+        expect(existRecommendation).not.toBeFalsy()
+    })
+    // it('GET /recommendations/top/:amount', async () => {
+    //     const recommendations = await manyRecomendationRandom()
+    //     await insertMany(recommendations)
 
+    // })
 
 })
 
