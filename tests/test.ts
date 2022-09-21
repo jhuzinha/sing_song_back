@@ -32,6 +32,23 @@ describe("ROUTE RECOMMENDATIONS", () => {
         expect(result.status).toEqual(200)
         expect(updateRecoomendation.score).toBeLessThan(existRecommendation.score)
     })
+    it('GET /recommendations', async () => {
+        const recommendations = await manyRecomendationRandom()
+        const existRecommendation = await insertMany(recommendations)
+        const result = await supertest(app).get('/recommendations')
+        const totalLength = existRecommendation.count
+        expect(result.body).toHaveLength(totalLength)
+    })
+    it('GET /recommendations/:id', async () => {
+        const recommendation = await recomendationRandom()
+        const existRecommendation = await createRecommendation(recommendation)
+        const result = await supertest(app).get(`/recommendations/${existRecommendation.id}`)
+        expect(result.body).not.toBeFalsy()
+        expect(result.body).toBeInstanceOf(Object)
+        expect(result.body).toMatchObject(existRecommendation)
+    })
+
+
 })
 
 afterAll(async () => {
