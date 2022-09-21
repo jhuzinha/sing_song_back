@@ -24,7 +24,14 @@ describe("ROUTE RECOMMENDATIONS", () => {
         expect(result.status).toEqual(200)
         expect(existRecommendation.score).toBeLessThan(updateRecoomendation.score)
     });
-
+    it('POST POST /recommendations/:id/downvote', async () => {
+        const recommendation = await recomendationRandom()
+        const existRecommendation = await createRecommendation(recommendation)
+        const result = await supertest(app).post(`/recommendations/${existRecommendation.id}/downvote`)
+        const updateRecoomendation = await verifyExitsRecommendation(existRecommendation.name)
+        expect(result.status).toEqual(200)
+        expect(updateRecoomendation.score).toBeLessThan(existRecommendation.score)
+    })
 })
 
 afterAll(async () => {
