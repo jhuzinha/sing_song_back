@@ -1,4 +1,4 @@
-import { prisma } from "../../src/database"
+import { prisma } from "../../../src/database"
 
 export async function deleteData() {
     await prisma.$transaction([prisma.$executeRaw`TRUNCATE TABLE recommendations;`]);
