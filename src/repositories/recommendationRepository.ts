@@ -19,7 +19,7 @@ function findAll(findAllWhere?: FindAllWhere) {
   return prisma.recommendation.findMany({
     where: filter,
     orderBy: { id: "desc" },
-    take: 10
+    take: 10,
   });
 }
 
@@ -42,8 +42,8 @@ function getFindAllFilter(
   };
 }
 
-function find(id: number) {
-  return prisma.recommendation.findUnique({
+async function find(id: number) {
+  return await prisma.recommendation.findUnique({
     where: { id },
   });
 }
@@ -64,7 +64,7 @@ async function updateScore(id: number, operation: "increment" | "decrement") {
 }
 
 async function remove(id: number) {
-  await prisma.recommendation.delete({
+  return await prisma.recommendation.delete({
     where: { id },
   });
 }
