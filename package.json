@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "nodemon src/server.ts",
-    "test": "dotenv -e .env.test prisma migrate dev && dotenv -e .env.test jest -i"
+    "test": "dotenv -e .env.test prisma migrate dev && dotenv -e .env.test jest -- -i"
   },
   "keywords": [],
   "author": "",

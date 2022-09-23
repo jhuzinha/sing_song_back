@@ -3,6 +3,9 @@ export default {
   preset: "ts-jest",
   testEnvironment: "node",
   extensionsToTreatAsEsm: [".ts"],
+  resetMocks: true,
+  clearMocks: true,
+  restoreMocks: true,
   collectCoverage: true,
   globals: {
     "ts-jest": {
@@ -11,5 +14,5 @@ export default {
   },
   moduleNameMapper: {
     "^(\\.{1,2}/.*)\\.js$": "$1",
-  }
+  },
 };

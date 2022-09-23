@@ -3,31 +3,32 @@ import { prisma } from "../database.js";
 import { CreateRecommendationData } from "../services/recommendationsService.js";
 
 async function create(createRecommendationData: CreateRecommendationData) {
-  await prisma.recommendation.create({
+  return await prisma.recommendation.create({
     data: createRecommendationData,
   });
 }
 
-interface FindAllWhere {
+export interface FindAllWhere {
   score: number;
   scoreFilter: "lte" | "gt";
 }
 
-function findAll(findAllWhere?: FindAllWhere) {
+async function findAll(findAllWhere?: FindAllWhere) {
   const filter = getFindAllFilter(findAllWhere);
-
-  return prisma.recommendation.findMany({
+  const recommendations = await prisma.recommendation.findMany({
     where: filter,
     orderBy: { id: "desc" },
     take: 10,
   });
+  return recommendations;
 }
 
-function getAmountByScore(take: number) {
-  return prisma.recommendation.findMany({
+async function getAmountByScore(take: number) {
+  const recommendations = await prisma.recommendation.findMany({
     orderBy: { score: "desc" },
     take,
   });
+  return recommendations;
 }
 
 function getFindAllFilter(
