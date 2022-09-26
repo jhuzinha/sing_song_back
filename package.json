@@ -9,7 +9,9 @@
   },
   "scripts": {
     "dev": "dotenv -e .env.test nodemon src/server.ts",
-    "test": "dotenv -e .env.test prisma migrate dev && dotenv -e .env.test jest -- -i"
+    "test": "dotenv -e .env.test prisma migrate dev && dotenv -e .env.test jest -- -i",
+    "test:unit": "dotenv -e .env.test  jest -- -i --coverage  --detectOpenHandles --testPathPattern=tests/unit",
+    "test:integration": "dotenv -e .env.test prisma migrate dev && dotenv jest -- -i --coverage --testPathPattern=tests/integration"
   },
   "keywords": [],
   "author": "",
