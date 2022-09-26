@@ -8,6 +8,9 @@ beforeEach(() => {
   jest.resetAllMocks();
   jest.clearAllMocks();
 });
+afterEach(() => {
+  jest.spyOn(global.Math, "random").mockRestore();
+});
 
 afterAll(() => {
   jest.resetAllMocks();
