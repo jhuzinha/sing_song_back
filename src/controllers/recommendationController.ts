@@ -49,7 +49,6 @@ async function getTop(req: Request, res: Response) {
 
 async function getById(req: Request, res: Response) {
   const { id } = req.params;
-
   const recommendation = await recommendationService.getById(+id);
   res.send(recommendation);
 }

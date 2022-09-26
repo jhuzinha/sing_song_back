@@ -23,7 +23,7 @@ describe("ROUTE RECOMMENDATIONS", () => {
   it("POST /recommendations", async () => {
     const recommendation = await recomendationRandom();
     const result = await supertest(app)
-      .post("/recommendations")
+      .post("/recommendations/")
       .send(recommendation);
     const existRecommendation = await verifyExitsRecommendation(
       recommendation.name
